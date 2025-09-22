@@ -73,7 +73,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 3000);
 });
   }
+  document.addEventListener("DOMContentLoaded", function () {
+  const words = document.querySelectorAll(".cd-words-wrapper b");
+  let currentIndex = 0;
+
+  setInterval(() => {
+    words[currentIndex].classList.remove("is-visible");
+    currentIndex = (currentIndex + 1) % words.length;
+    words[currentIndex].classList.add("is-visible");
+  }, 3000);
+});
+  
 
   typeProfession(); // ابدأ وظيفة الكتابة
 
 });
+
