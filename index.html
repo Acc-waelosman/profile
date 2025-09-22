@@ -1,45 +1,95 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>وائل عثمان - الملف الشخصي</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wael Osman - Profile</title>
+    <style>
+        /* CSS styles to make the text look good and add the blinking cursor */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .hero-text {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #typed-text::after {
+            content: '|';
+            display: inline;
+            animation: blink 0.7s infinite;
+            margin-right: 5px; /* Adjust margin for right-to-left languages */
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <div class="header">
-    <div class="navbar">
-      <div class="logo">وائل عثمان</div>
-      <div class="links">
-        <a href="#home" class="nav-link">الرئيسية</a>
-        <a href="#services" class="nav-link">الخدمات</a>
-        <a href="#about" class="nav-link">من نحن</a>
-        <a href="#contact" class="nav-link">اتصل بنا</a>
-      </div>
-    </div>
+    <p class="hero-text">
+        أنا 
+        <span id="typed-text"></span>
+    </p>
 
-    <div class="hero">
-      <img src="profile.jpg" alt="صورة وائل عثمان" class="hero-image">
+    <script>
+        /* JavaScript for the typing and erasing effect */
+        document.addEventListener('DOMContentLoaded', function() {
+            const typedTextSpan = document.getElementById('typed-text');
+            
+            // The words that will appear one after another
+            const textArray = ["رئيس حسابات", "محلل مالي", "مراجع حسابات", "وائل عثمان"];
+            
+            // Speed settings (in milliseconds)
+            const typingSpeed = 100;
+            const deletingSpeed = 50;
+            const pauseTime = 1500; // Pause before erasing
 
-      <h3 class="cd-headline clip is-full-width">
-        <span class="cd-words-wrapper">
-          <b class="is-visible">أنا رئيس حسابات</b>
-          <b>أنا مراجع مالي</b>
-          <b>أنا وائل عثمان</b>
-        </span>
-      </h3>
+            let textArrayIndex = 0;
+            let charIndex = 0;
 
-      <div class="hero-content">
-        <p>مرحبًا بك في ملفي الشخصي</p>
-        <a href="#about" class="btn">من نحن</a>
-      </div>
-    </div>
-  </div>
+            function type() {
+                if (charIndex < textArray[textArrayIndex].length) {
+                    typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+                    charIndex++;
+                    setTimeout(type, typingSpeed);
+                } else {
+                    setTimeout(erase, pauseTime);
+                }
+            }
 
-  <!-- باقي الأقسام مثل الخدمات، من نحن، اتصل بنا -->
+            function erase() {
+                if (charIndex > 0) {
+                    typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+                    charIndex--;
+                    setTimeout(erase, deletingSpeed);
+                } else {
+                    textArrayIndex++;
+                    if (textArrayIndex >= textArray.length) {
+                        textArrayIndex = 0; // Loop back to the beginning
+                    }
+                    setTimeout(type, typingSpeed + 500); // Wait a bit before starting to type again
+                }
+            }
 
-  <script src="script.js"></script>
+            setTimeout(type, pauseTime);
+        });
+    </script>
+
 </body>
 </html>
