@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+window.onload = function () {
   const wordsWrapper = document.querySelector(".cd-words-wrapper");
   if (!wordsWrapper) return;
 
@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentIndex = 0;
 
   setInterval(() => {
-    words[currentIndex].classList.remove("is-visible");
-    currentIndex = (currentIndex + 1) % words.length;
+    words.forEach((word, i) => word.classList.remove("is-visible"));
     words[currentIndex].classList.add("is-visible");
+    currentIndex = (currentIndex + 1) % words.length;
   }, 3000);
-});
+};
