@@ -6,7 +6,7 @@ window.onload = function () {
   let currentIndex = 0;
 
   setInterval(() => {
-    words.forEach((word, i) => word.classList.remove("is-visible"));
+    words.forEach((word) => word.classList.remove("is-visible"));
     words[currentIndex].classList.add("is-visible");
     currentIndex = (currentIndex + 1) % words.length;
   }, 3000);
