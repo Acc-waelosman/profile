@@ -62,7 +62,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const typingSpeed = isDeleting ? 75 : 150; // سرعة المسح أسرع من الكتابة
       setTimeout(typeProfession, typingSpeed);
     }
+    document.addEventListener("DOMContentLoaded", function () {
+  const words = document.querySelectorAll(".cd-words-wrapper b");
+  let currentIndex = 0;
+
+  setInterval(() => {
+    words[currentIndex].classList.remove("is-visible");
+    currentIndex = (currentIndex + 1) % words.length;
+    words[currentIndex].classList.add("is-visible");
+  }, 3000);
+});
   }
 
   typeProfession(); // ابدأ وظيفة الكتابة
+
 });
