@@ -335,4 +335,19 @@ body {
 .cd-words-wrapper b.is-visible {
   opacity: 1;
 }
+.cd-headline.clip span {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.cd-words-wrapper {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  margin-top
+
 
