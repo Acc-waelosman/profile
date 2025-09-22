@@ -1,69 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const navLinks = document.querySelectorAll('.nav-link');
+document.addEventListener("DOMContentLoaded", function () {
+  const wordsWrapper = document.querySelector(".cd-words-wrapper");
+  if (!wordsWrapper) return;
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetId = link.getAttribute('href');
-      const targetSection = document.querySelector(targetId);
-      if (targetSection) {
-        window.scrollTo({
-          top: targetSection.offsetTop - 80, 
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, {
-    threshold: 0.2
-  });
-
-  const sections = document.querySelectorAll('.section');
-  sections.forEach(section => {
-    observer.observe(section);
-  });
-
-  // كود النص المتحرك
-  const professions = [
-    "رئيس حسابات",
-    "مراجع مالي",
-    "محلل مالي",
-    "ادارة حسابات"
-  ];
-  let professionIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  const animatedTextElement = document.querySelector('.animated-text');
-
-  function typeProfession() {
-    const currentProfession = professions[professionIndex];
-    if (isDeleting) {
-      animatedTextElement.textContent = currentProfession.substring(0, charIndex - 1);
-      charIndex--;
-    } else {
-      animatedTextElement.textContent = currentProfession.substring(0, charIndex + 1);
-      charIndex++;
-    }
-
-    if (!isDeleting && charIndex === currentProfession.length + 1) {
-      setTimeout(() => isDeleting = true, 1000); // انتظر ثانية قبل البدء في المسح
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      professionIndex = (professionIndex + 1) % professions.length;
-      setTimeout(typeProfession, 500); // انتظر نصف ثانية قبل كتابة الكلمة التالية
-    } else {
-      const typingSpeed = isDeleting ? 75 : 150; // سرعة المسح أسرع من الكتابة
-      setTimeout(typeProfession, typingSpeed);
-    }
-    document.addEventListener("DOMContentLoaded", function () {
-  const words = document.querySelectorAll(".cd-words-wrapper b");
+  const words = wordsWrapper.querySelectorAll("b");
   let currentIndex = 0;
 
   setInterval(() => {
@@ -72,20 +11,3 @@ document.addEventListener('DOMContentLoaded', () => {
     words[currentIndex].classList.add("is-visible");
   }, 3000);
 });
-  }
-  document.addEventListener("DOMContentLoaded", function () {
-  const words = document.querySelectorAll(".cd-words-wrapper b");
-  let currentIndex = 0;
-
-  setInterval(() => {
-    words[currentIndex].classList.remove("is-visible");
-    currentIndex = (currentIndex + 1) % words.length;
-    words[currentIndex].classList.add("is-visible");
-  }, 3000);
-});
-  
-
-  typeProfession(); // ابدأ وظيفة الكتابة
-
-});
-
